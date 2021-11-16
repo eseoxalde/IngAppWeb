@@ -8,26 +8,34 @@ import { Coin } from '../model/Coin';
   template: `
   <div class="container">
   <div [hidden]="submitted">
-    <h1>New coin</h1>
+    <h1>Alta de Cripto</h1>
     <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
       <div class="form-group">
-        <label for="name">Name</label>
+        <label for="name">Nombre</label>
         <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name"  #name="ngModel">
-        <div [hidden]="name.valid || name.pristine" class="alert alert-danger"> Name is required </div>
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger"> El nombre es obligatorio </div>
       </div>
-      <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+      <div class="form-group">
+        <label for="acronym">Acrónimo</label>
+        <input type="text" class="form-control" id="acronym" required [(ngModel)]="model.acronym" name="acronym"  #acronym="ngModel">
+        <div [hidden]="acronym.valid || acronym.pristine" class="alert alert-danger"> El acrónimo es obligatorio </div>
+      </div>
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <input type="text" class="form-control" id="description" [(ngModel)]="model.description" name="description"  #description="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="url">URL</label>
+        <input type="text" class="form-control" id="url" [(ngModel)]="model.url" name="url"  #url="ngModel">
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Agregar</button>
       <button type="button" class="btn btn-default" (click)="newCoin(); heroForm.reset()">Clear</button>
     </form>
-  </div>
-  <div [hidden]="!submitted">
-    <h2>You submitted the following:</h2>
-    <div class="row">
-      <div class="col-xs-3">Name</div>
-      <div class="col-xs-9">{{ model.name }}</div>
-    </div>
-    <a routerLink="/" > List of coins</a>
-    <br>
-    <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+    <div class="row justify-content-md-center">
+		<nav>
+			<a routerLink="/home" class="pull-right btn btn-default" role="button">Volver</a>
+		</nav>
+	</div>
   </div>
  </div>
  
@@ -37,14 +45,16 @@ import { Coin } from '../model/Coin';
 })
 export class NewCoinComponent implements OnInit {
 
-  model= new Coin("")
-  submitted=false
+  model=new Coin("", "", "","");
+  submitted=false;
 
-  constructor(private service: CoinInMemoryService, private router:Router) { }
+  constructor(private service:CoinInMemoryService, private router:Router) { }
 
   ngOnInit(): void {
   }
-
+  newCoin(){
+    this.model=new Coin("", "", "","");
+  }
   onSubmit(){
     this.service.addCoin(this.model)
     this.submitted=true
@@ -52,7 +62,4 @@ export class NewCoinComponent implements OnInit {
     this.router.navigateByUrl('/home')
   }
 
-  newCoin(){
-    this.model=new Coin("")
-  }
 }

@@ -6,7 +6,7 @@ import { Coin } from './model/Coin';
 })
 export class CoinInMemoryService {
 
-  coins=[new Coin("Bitcoin"), new Coin("Etherium")]
+  coins = [new Coin("Litecoin", "LTC", "Un litecoin", "wiki:litecoin"), new Coin("Ethereum", "ETH", "Un etherum", "wiki:etherum")]
 
   constructor() { }
 
@@ -17,7 +17,7 @@ export class CoinInMemoryService {
   getCoins() {
     return this.coins
   }
-
+  
   removeCoin(selectedCoin:Coin){
     this.coins=this.coins.filter(item=>item!==selectedCoin)
   }

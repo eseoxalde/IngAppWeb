@@ -4,20 +4,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoinListComponent } from './coin-list/coin-list.component';
+import { CoinlistComponent } from './coinlist/coinlist.component';
 import { NewCoinComponent } from './new-coin/new-coin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoinListComponent,
+    CoinlistComponent,
     NewCoinComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
